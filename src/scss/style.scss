@@ -1,0 +1,22 @@
+// Import bootstrap and fontawesome
+@import "core/_variables-custom";
+@import 'core/_bootstrap-custom';
+
+// @import '~@fortawesome/fontawesome-free-webfonts/scss/fontawesome';
+// @import '~@fortawesome/fontawesome-free-webfonts/scss/fa-brands';
+// @import '~@fortawesome/fontawesome-free-webfonts/scss/fa-regular';
+// @import '~@fortawesome/fontawesome-free-webfonts/scss/fa-solid';
+
+
+@import 'core/mixins/_custom';
+@import '~@splidejs/splide/dist/css/splide.min.css';
+@import 'core/system/_icons';
+@import 'core/system/_general';
+@import 'core/sections/banner';
+@import 'core/sections/tabs';
+@import 'core/sections/section-1';
+@import 'core/sections/section-2';
+@import 'core/sections/section-3';
+
+
+@import 'core/footer/_footer';

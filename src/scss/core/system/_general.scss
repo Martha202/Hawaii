@@ -1,0 +1,65 @@
+html,
+body {
+  height: 100%;
+
+}
+
+body {
+  font-weight: 400;
+  font-family: $primary-font;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.p-rltv {
+  position: relative;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+a {
+  font-weight: normal;
+  @include transition-animation();
+
+  &:hover, &:focus {
+    outline: 0;
+    text-decoration: none;
+  }
+}
+
+button, .btn {
+  outline: 0;
+  font-weight: 600;
+  @include transition-animation();
+
+  &:focus,
+    &:active:focus {
+    outline: 0;
+  }
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.splide__slide img {
+	width : 100%;
+	height: auto;
+}
+.general-titel{
+  color: $Cod-Gray;
+  font-size: 34px;
+  font-weight: $headings-font-weight;
+  font-family: $headings-font-family;
+  padding: 0 0 40px 0;
+  line-height: 0.9;
+} 

@@ -1,0 +1,126 @@
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+  $src: null;
+
+  $extmods: (
+    eot: "?",
+    svg: "#" + str-replace($name, " ", "_")
+    );
+
+  $formats: (
+    otf: "opentype",
+    ttf: "truetype"
+    );
+
+  @each $ext in $exts {
+    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}
+@mixin transition-animation($time: 300, $delay:0){
+  -webkit-transition: all #{$time}ms ease-in-out #{$delay}ms;
+  -moz-transition: all #{$time}ms ease-in-out #{$delay}ms;
+  -o-transition: all #{$time}ms ease-in-out #{$delay}ms;
+  transition: all #{$time}ms ease-in-out #{$delay}ms;
+}
+@mixin social-links($background-color, $hover-background-color: #fff){
+  background-color:$background-color;
+  border-color:$background-color;
+  &:hover{
+    background-color: $hover-background-color;
+    color:$background-color;
+  }
+}
+@mixin btn(){
+  display: inline-block;
+  margin-bottom: 0; // For input.btn
+  font-weight: $btn-font-weight;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: 1px solid transparent;
+  white-space: nowrap;
+  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $border-radius-base);
+  @include user-select(none);
+}
+@mixin min-max-height($lg-height, $md-height, $sm-height, $xs-height){
+  min-height: $lg-height;
+  max-height: $lg-height;
+  @include bp(max-width lg){
+    min-height: $md-height;
+    max-height: $md-height;
+  }
+  @include bp(max-width md){
+    min-height: $sm-height;
+    max-height: $sm-height;
+  }
+  @include bp(max-width sm){
+    min-height: $xs-height;
+    max-height: $xs-height;
+  }
+}
+@mixin images-wrapper-ratios($padding-bottom){
+  overflow: hidden;
+  &:before{
+    content: "";
+    padding-bottom: $padding-bottom;
+    display: block;
+  }
+  img{
+    @include c-align;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+  }
+}
+@mixin input-placeholder(){
+  &::-webkit-input-placeholder{ @content }
+  &::-moz-placeholder{ @content }
+  &:-ms-input-placeholder{ @content }
+  &:-moz-placeholder{ @content }
+}
+@mixin full-absolute() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+@mixin keyframes($animation-name){
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+@mixin cover-absolute-img(){
+  @include c-align;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
